@@ -1,5 +1,5 @@
 # mh-inventory
-This is the [pc-inventory](https://github.com/Project-Sloth/ps-inventory) but i edit it for mh-cashasitem and mh-stashes,
+This is the [pc-inventory](https://github.com/Project-Sloth/ps-inventory) but i edit it for [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem) and [mh-stashes](https://github.com/MaDHouSe79/mh-stashes),
 also i renamed it back to qb-inventory cause the most servers uses that name in the exports,
 and if that is the case you can rename every export,
 but now in this version this is not needed anymore, i keep it as default as possible, 
