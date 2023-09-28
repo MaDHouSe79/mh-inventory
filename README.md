@@ -7,7 +7,7 @@ if you already had ps-inventory you need to rename all your exports back to how 
 
 
 # Orginal ps-inventory
-[pc-inventory](https://github.com/Project-Sloth/ps-inventory)
+- [pc-inventory](https://github.com/Project-Sloth/ps-inventory)
 
 # Compatible
 - [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
