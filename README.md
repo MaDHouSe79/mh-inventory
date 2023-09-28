@@ -6,7 +6,7 @@ but now in this version this is not needed anymore, i keep it as default as poss
 if you already had ps-inventory you need to rename all your exports back to how it was.
 
 
-# Orginal ps-inventory
+# Original ps-inventory
 - [pc-inventory](https://github.com/Project-Sloth/ps-inventory)
 
 # Compatible
