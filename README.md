@@ -45,3 +45,12 @@ if you already had ps-inventory you need to rename all your exports back to how 
 - 3. Place the new `qb-inventory` back in the folder `resources/[qb]`.
 - 4. Add your own images from your old `qb-inventory/html/images` in the new `qb-inventory/html/images` folder.
 - 5. Restart the server.
+ 
+
+## 🙈 Youtube & Discord
+- [Youtube](https://www.youtube.com/c/MaDHouSe79)
+- [Discord](https://discord.gg/cEMSeE9dgS)
+
+# LICENSE
+[GPL LICENSE](./LICENSE)<br />
+
