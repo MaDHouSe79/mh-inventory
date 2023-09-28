@@ -5,21 +5,21 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MaDHouSe79/mh-inventory/issues">
-    <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-inventory"/> 
-  </a>
-  <a href="https://github.com/MaDHouSe79/mh-inventory/watchers">
-    <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-inventory"/> 
-  </a> 
-  <a href="https://github.com/MaDHouSe79/mh-inventory/network/members">
-    <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-inventory"/> 
-  </a>  
-  <a href="https://github.com/MaDHouSe79/mh-inventory/stargazers">
-    <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-inventory?color=white"/> 
-  </a>
-  <a href="https://github.com/MaDHouSe79/mh-inventory/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/MaDHouSe79/mh-inventory?color=black"/> 
-  </a>      
+    <a href="https://github.com/MaDHouSe79/mh-inventory/issues">
+        <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-inventory"/> 
+    </a>
+    <a href="https://github.com/MaDHouSe79/mh-inventory/watchers">
+        <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-inventory"/> 
+    </a> 
+    <a href="https://github.com/MaDHouSe79/mh-inventory/network/members">
+        <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-inventory"/> 
+    </a>  
+    <a href="https://github.com/MaDHouSe79/mh-inventory/stargazers">
+        <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-inventory?color=white"/> 
+    </a>
+    <a href="https://github.com/MaDHouSe79/mh-inventory/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/MaDHouSe79/mh-inventory?color=black"/> 
+    </a>      
 </p>
 
 
