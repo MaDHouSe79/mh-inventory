@@ -1,3 +1,28 @@
+<p align="center">
+    <img width="140" src="https://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/128/Letter-M-icon.png" />  
+    <h1 align="center">Hi 👋, I'm MaDHouSe</h1>
+    <h3 align="center">A passionate allround developer </h3>    
+</p>
+
+<p align="center">
+  <a href="https://github.com/MaDHouSe79/mh-inventory/issues">
+    <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-inventory"/> 
+  </a>
+  <a href="https://github.com/MaDHouSe79/mh-cashasitem/watchers">
+    <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-inventory"/> 
+  </a> 
+  <a href="https://github.com/MaDHouSe79/mh-inventory/network/members">
+    <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-inventory"/> 
+  </a>  
+  <a href="https://github.com/MaDHouSe79/mh-inventory/stargazers">
+    <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-inventory?color=white"/> 
+  </a>
+  <a href="https://github.com/MaDHouSe79/mh-inventory/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/MaDHouSe79/mh-inventory?color=black"/> 
+  </a>      
+</p>
+
+
 # mh-inventory
 This is the [pc-inventory](https://github.com/Project-Sloth/ps-inventory) but i edit it for [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem) and [mh-stashes](https://github.com/MaDHouSe79/mh-stashes),
 also i renamed it back to qb-inventory cause the most servers uses that name in the exports,
