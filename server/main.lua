@@ -1408,32 +1408,72 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 	end
 end)
 
+-- mh-stashes (Start)
+local lastUsedStashItem = nil
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	if inventory == "player" or inventory == "hotbar" then
 		local itemData = Player.Functions.GetItemBySlot(item.slot)
 		if itemData then
-	local itemInfo = QBCore.Shared.Items[itemData.name]
+			local itemInfo = QBCore.Shared.Items[itemData.name]
 			if itemData.type ~= "weapon" then
 				if itemData.info.quality then
 					if itemData.info.quality <= 0 then
-						if itemInfo['delete'] and RemoveItem(src,itemData.name,1,item.slot) then
+						if itemInfo['delete'] and RemoveItem(src,itemData.name, 1, item.slot) then
 							TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
 							TriggerClientEvent('inventory:client:ItemBox',src, itemInfo, "remove")
 							return
-	else
+						else
 							TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
 							return
 						end
 					end
 				end
 			end
-		UseItem(itemData.name, src, itemData)
-		TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
-	end
+			if Config.Stashes[itemData.name:lower()] ~= nil then
+				lastUsedStashItem = itemData 
+			end
+			UseItem(itemData.name, src, itemData)
+			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+		end
 	end
 end)
+
+local function IsItemAllowedToAdd(src, stash, item)
+	local canuse = true
+	if Config.Stashes[stash] then
+		if lastUsedStashItem ~= nil then
+			-- print(json.encode(lastUsedStashItem, {indent = true}))
+			if lastUsedStashItem.info.allowedItems ~= nil then
+				if not lastUsedStashItem.info.allowedItems[item.name] then
+					TriggerEvent('mh-stashes:server:allowed_items_error', src, lastUsedStashItem.info.allowedItems)
+					canuse = false
+				end
+			end
+		end
+	end
+	return canuse
+end
+
+local function IsStashItemLootable(stash, item)
+	local canuse = true
+	if Config.Stashes[stash] then
+		if lastUsedStashItem ~= nil then
+			-- print(json.encode(lastUsedStashItem, {indent = true}))
+			if lastUsedStashItem and lastUsedStashItem.info and lastUsedStashItem.item == stash then
+				if not lastUsedStashItem.info.canloot then
+					canuse = false
+					TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
+				elseif lastUsedStashItem.info.isOnMission then
+					canuse = false
+					TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
+				end
+			end
+		end
+	end
+	return canuse
+end
 
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
 	local src = source
@@ -1559,17 +1599,9 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				local toItemData = Stashes[stashId].items[toSlot]
 				
 				-- mh-stashes (start)
-				local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
-				local canuse = true
-				if Config.Stashes[stash] then -- we hebben een koffer
-					if Config.Stashes[stash].allowedItems then -- zijn er items die we in de koffer mogen doen?
-						if not Config.Stashes[stash].allowedItems[fromItemData.name:lower()] then -- als het item niet in de koffer mag?
-							canuse = false
-							TriggerEvent('mh-stashes:server:allowed_items_error', src, Config.Stashes[stash].allowedItems)						
-						end
-					end	
-				end
-				-- mh-stashes (end)	
+				local canuse = IsItemAllowedToAdd(src, QBCore.Shared.SplitStr(stashId, "_")[1], fromItemData)
+				-- mh-stashes (end)
+
 				if canuse then
 					RemoveItem(src, fromItemData.name, fromAmount, fromSlot)
 					TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
@@ -1592,7 +1624,8 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
 					AddToStash(stashId, toSlot, fromSlot, itemInfo["name"], fromAmount, fromItemData.info)
 				end
-				elseif QBCore.Shared.SplitStr(toInventory, "-")[1] == "traphouse" then
+				
+			elseif QBCore.Shared.SplitStr(toInventory, "-")[1] == "traphouse" then
 				-- Traphouse
 				local traphouseId = QBCore.Shared.SplitStr(toInventory, "_")[2]
 				local toItemData = exports['qb-traphouse']:GetInventoryData(traphouseId, toSlot)
@@ -1916,28 +1949,16 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		fromAmount = tonumber(fromAmount) or fromItemData.amount
 		
 		-- mh-stashes (start)
-		local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
-		local canloot = true
-		if Config.Stashes[stash] then
-			if fromItemData and fromItemData.info and fromItemData.info.item == stash then
-				if not fromItemData.info.canloot then
-					canloot = false
-				else
-					if fromItemData.info.isOnMission then
-						canloot = false
-					end
-				end
-			end
-		end
+		local canuse = IsStashItemLootable(QBCore.Shared.SplitStr(stashId, "_")[1], fromItemData)
 		-- mh-stashes (end)
 
-		if canloot then
+		if canuse then
 			if fromItemData and fromItemData.amount >= fromAmount then
 				local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
 				if toInventory == "player" or toInventory == "hotbar" then
 					local toItemData = GetItemBySlot(src, toSlot)
 					if Config.Stashes[fromItemData.name:lower()] then
-						local hasItem = QBCore.Functions.HasItem(src, fromItemData.name, 1)
+						local hasItem = QBCore.Functions.HasItem(src, fromItemData.name:lower(), 1)
 						if hasItem then
 							TriggerEvent('mh-stashes:server:max_carry_item', src)
 						else
@@ -2010,8 +2031,6 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 			else
 				QBCore.Functions.Notify(src, Lang:t("notify.itemexist"), "error")
 			end
-		else
-			TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
 		end
 
 	elseif QBCore.Shared.SplitStr(fromInventory, "-")[1] == "traphouse" then
@@ -2281,6 +2300,8 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		end
 	end
 end)
+-- mh-stashes (End)
+
 
 RegisterNetEvent('qb-inventory:server:SaveStashItems', function(stashId, items)
     MySQL.Async.insert('INSERT INTO stashitems (stash, items) VALUES (:stash, :items) ON DUPLICATE KEY UPDATE items = :items', {
