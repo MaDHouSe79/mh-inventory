@@ -66,13 +66,10 @@ $(document).on("dblclick", ".item-slot", function(e) {
     var ItemInventory = $(this).parent().attr("data-inventory");
     if (ItemData) {
         Inventory.Close();
-        $.post(
-            "https://qb-inventory/UseItem",
-            JSON.stringify({
-                inventory: ItemInventory,
-                item: ItemData,
-            })
-        );
+        $.post("https://qb-inventory/UseItem", JSON.stringify({
+            inventory: ItemInventory,
+            item: ItemData,
+        }));
     }
 });
 
@@ -269,9 +266,7 @@ $(document).on("click", ".weapon-attachments-back", function(e) {
 // });
 
 function FormatAttachmentInfo(data) {
-    $.post(
-        "https://qb-inventory/GetWeaponData",
-        JSON.stringify({
+    $.post("https://qb-inventory/GetWeaponData", JSON.stringify({
             weapon: data.name,
             ItemData: ClickedItemData,
         }),
@@ -367,9 +362,7 @@ function handleAttachmentDrag() {
         accept: ".weapon-attachment",
         hoverClass: "weapon-attachments-remove-hover",
         drop: function(event, ui) {
-            $.post(
-                "https://qb-inventory/RemoveAttachment",
-                JSON.stringify({
+            $.post("https://qb-inventory/RemoveAttachment", JSON.stringify({
                     AttachmentData: AttachmentDraggingData,
                     WeaponData: ClickedItemData,
                 }),
@@ -435,9 +428,7 @@ $(document).on("click", "#weapon-attachments", function(e) {
         AttachmentScreenActive = true;
         FormatAttachmentInfo(ClickedItemData);
     } else {
-        $.post(
-            "https://qb-inventory/Notify",
-            JSON.stringify({
+        $.post("https://qb-inventory/Notify", JSON.stringify({
                 message: "Attachments are unavailable for this gun.",
                 type: "error",
             })
@@ -532,25 +523,13 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p><strong>ID: </strong><span>" + itemData.info.stashid + "</span></p>" +
-                "<p><strong>Can Loot: </strong><span>" + canloot + "</span></p>" +
-                "<p><strong>On Mission: </strong><span>" + isOnMission + "</span></p>" +
-                "<p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Cash: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
-            );
-
-        } else if (itemData.name == "cashsuitcase") {
-            var canloot = "No"
-            var isOnMission = "No"
-            if (itemData.info.canloot == true) { canloot = "Yes" }
-            if (itemData.info.isOnMission == true) { isOnMission = "Yes" }
-            $(".item-info-title").html("<p>" + itemData.label + "</p>");
-            $(".item-info-description").html(
-                "<p><strong>ID: </strong><span>" + itemData.info.stashid + "</span></p>" +
+                "<p><strong>Owner: </strong><span>" + itemData.info.owner + "</span></p>" +
                 "<p><strong>Can Loot: </strong><span>" + canloot + "</span></p>" +
                 "<p><strong>On Mission: </strong><span>" + isOnMission + "</span></p>" +
                 "<p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
             );
 
-        } else if (itemData.name == "drugssuitcase") {
+        } else if (itemData.name == "cashstash") {
             var canloot = "No"
             var isOnMission = "No"
             if (itemData.info.canloot == true) { canloot = "Yes" }
@@ -558,12 +537,13 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p><strong>ID: </strong><span>" + itemData.info.stashid + "</span></p>" +
+                "<p><strong>Owner: </strong><span>" + itemData.info.owner + "</span></p>" +
                 "<p><strong>Can Loot: </strong><span>" + canloot + "</span></p>" +
                 "<p><strong>On Mission: </strong><span>" + isOnMission + "</span></p>" +
                 "<p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
             );
 
-        } else if (itemData.name == "weaponsuitcase") {
+        } else if (itemData.name == "drugsstash") {
             var canloot = "No"
             var isOnMission = "No"
             if (itemData.info.canloot == true) { canloot = "Yes" }
@@ -571,6 +551,21 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p><strong>ID: </strong><span>" + itemData.info.stashid + "</span></p>" +
+                "<p><strong>Owner: </strong><span>" + itemData.info.owner + "</span></p>" +
+                "<p><strong>Can Loot: </strong><span>" + canloot + "</span></p>" +
+                "<p><strong>On Mission: </strong><span>" + isOnMission + "</span></p>" +
+                "<p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+
+        } else if (itemData.name == "weaponstash") {
+            var canloot = "No"
+            var isOnMission = "No"
+            if (itemData.info.canloot == true) { canloot = "Yes" }
+            if (itemData.info.isOnMission == true) { isOnMission = "Yes" }
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<p><strong>ID: </strong><span>" + itemData.info.stashid + "</span></p>" +
+                "<p><strong>Owner: </strong><span>" + itemData.info.owner + "</span></p>" +
                 "<p><strong>Can Loot: </strong><span>" + canloot + "</span></p>" +
                 "<p><strong>On Mission: </strong><span>" + isOnMission + "</span></p>" +
                 "<p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
@@ -1765,9 +1760,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                         }
                     }
             $.post("https://qb-inventory/PlayDropSound", JSON.stringify({}));
-            $.post(
-                "https://qb-inventory/SetInventoryData",
-                JSON.stringify({
+            $.post("https://qb-inventory/SetInventoryData", JSON.stringify({
                     fromInventory: $fromInv.attr("data-inventory"),
                     toInventory: $toInv.attr("data-inventory"),
                     fromSlot: $fromSlot,
@@ -1786,9 +1779,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                     toData.combinable != null &&
                     isItemAllowed(fromData.name, toData.combinable.accept)
                 ) {
-                    $.post(
-                        "https://qb-inventory/getCombineItem",
-                        JSON.stringify({ item: toData.combinable.reward }),
+                    $.post("https://qb-inventory/getCombineItem", JSON.stringify({ item: toData.combinable.reward }),
                         function(item) {
                             $(".combine-option-text").html(
                                 "<p>If you combine these items you get: <b>" +
@@ -2024,9 +2015,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                         // }
                     // }
 
-                    $.post(
-                        "https://qb-inventory/SetInventoryData",
-                        JSON.stringify({
+                    $.post("https://qb-inventory/SetInventoryData", JSON.stringify({
                             fromInventory: $fromInv.attr("data-inventory"),
                             toInventory: $toInv.attr("data-inventory"),
                             fromSlot: $fromSlot,
@@ -2070,9 +2059,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                             );
                     }
 
-                    $.post(
-                        "https://qb-inventory/SetInventoryData",
-                        JSON.stringify({
+                    $.post("https://qb-inventory/SetInventoryData", JSON.stringify({
                             fromInventory: $fromInv.attr("data-inventory"),
                             toInventory: $toInv.attr("data-inventory"),
                             fromSlot: $fromSlot,
@@ -2355,9 +2342,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                     // }
                         }
                 $.post("https://qb-inventory/PlayDropSound", JSON.stringify({}));
-                $.post(
-                    "https://qb-inventory/SetInventoryData",
-                    JSON.stringify({
+                $.post("https://qb-inventory/SetInventoryData", JSON.stringify({
                         fromInventory: $fromInv.attr("data-inventory"),
                         toInventory: $toInv.attr("data-inventory"),
                         fromSlot: $fromSlot,
@@ -3161,12 +3146,9 @@ var requiredItemOpen = false;
 $(document).on("click", "#rob-money", function(e) {
     e.preventDefault();
     var TargetId = $(this).data("TargetId");
-    $.post(
-        "https://qb-inventory/RobMoney",
-        JSON.stringify({
-            TargetId: TargetId,
-        })
-    );
+    $.post("https://qb-inventory/RobMoney", JSON.stringify({
+        TargetId: TargetId,
+    }));
     $("#rob-money").remove();
 });
 
@@ -3184,13 +3166,10 @@ $("#item-give").droppable({
         if (amount == 0) {
             amount = fromData.amount;
         }
-        $.post(
-            "https://qb-inventory/GiveItem",
-            JSON.stringify({
-                inventory: fromInventory,
-                item: fromData,
-                amount: parseInt(amount),
-            })
-        );
+        $.post("https://qb-inventory/GiveItem", JSON.stringify({
+            inventory: fromInventory,
+            item: fromData,
+            amount: parseInt(amount),
+        }));
     },
 });
