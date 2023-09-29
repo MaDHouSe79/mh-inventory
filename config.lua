@@ -10,40 +10,13 @@ Config.MaxDropViewDistance = 12.5 -- The distance in GTA Units that a drop can b
 Config.UseItemDrop = false -- This will enable item object to spawn on drops instead of markers
 Config.ItemDropObject = `sf_prop_sf_backpack_01a` -- if Config.UseItemDrop is true, this will be the prop that spawns for the item
 
--- it works but this is for mh-suitecases,
--- this is needed in the inventory config, or the get many errors.
-Config.Stashes = {
-    ['walletstash'] = {
-        allowedItems = {
-            ["cash"] = true,
-            ["id_card"] = true,
-            ["driver_license"] = true,
-            ["lawyerpass"] = true,
-            ["weaponlicense"] = true,
-            ["visa"] = true,
-            ["mastercard"] = true,
-            ["security_card_01"] = true,
-            ["security_card_02"] = true,
-        },
-    },
-    ["cashstash"] = {
-        allowedItems = {
-            ["cash"] = true,
-        },
-    },
-    ["drugsstash"] = {
-        allowedItems = {
-            ["meth"] = true,
-            ["coke"] = true,
-            ["weed"] = true,
-        },
-    },
-    ['weaponstash'] = {
-        allowedItems = {
-            ["weapon_pistol"] = true,
-            ["pistol_ammo"] = true,
-        },
-    },
+
+-- this is needed in the inventory config, or the get many errors,  this is for mh-suitecases,
+Config.Stashes = { 
+    ["walletstash"] = true, 
+    ["cashstash"] = true, 
+    ["drugsstash"] = true, 
+    ["weaponstash"] = true
 }
 
 Config.CraftingObject = `prop_toolchest_05` -- Only needed if not using target | Line 928 to change Target Models
