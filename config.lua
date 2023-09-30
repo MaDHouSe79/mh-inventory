@@ -11,7 +11,7 @@ Config.UseItemDrop = false -- This will enable item object to spawn on drops ins
 Config.ItemDropObject = `sf_prop_sf_backpack_01a` -- if Config.UseItemDrop is true, this will be the prop that spawns for the item
 
 
--- this is needed in the inventory config, or the get many errors,  this is for mh-suitecases,
+-- This is needed in the inventory config, or it get many errors, this is for mh-stashes,
 Config.Stashes = { 
     ["walletstash"] = true, 
     ["cashstash"] = true, 
