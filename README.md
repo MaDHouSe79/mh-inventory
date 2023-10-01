@@ -47,9 +47,9 @@ if you already had ps-inventory you need to rename all your exports back to how 
 - 5. Restart the server.
  
 
-## 🙈 Youtube & Discord
+## 🙈 Youtube
 - [Youtube](https://www.youtube.com/c/MaDHouSe79)
-- [Discord](https://discord.gg/cEMSeE9dgS)
+
 
 # LICENSE
 [GPL LICENSE](./LICENSE)<br />
