@@ -5,6 +5,7 @@ local Translations = {
         ['not_the_right_items'] = "You don\'t have the right items..",
         ['no_cash'] = "You don\'t have enough cash..",
         ['can_not_sell_item'] = "You can\'t sell this item..",
+        ['can_not_open'] = "You can\'t open this truck!",
     },
 }
 
