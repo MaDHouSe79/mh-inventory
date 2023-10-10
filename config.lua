@@ -1,6 +1,6 @@
 Config = {}
 
-Config.UseTarget = true--GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
+Config.UseTarget = true--GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add "setr UseTarget true" to use this and just that from true to false or the other way around)
 
 Config.MaxInventoryWeight = 120000 -- Max weight a player can carry (default 120kg, written in grams)
 Config.MaxInventorySlots = 41 -- Max inventory slots for a player
@@ -8,27 +8,57 @@ Config.MaxInventorySlots = 41 -- Max inventory slots for a player
 Config.CleanupDropTime = 15 * 60 -- How many seconds it takes for drops to be untouched before being deleted
 Config.MaxDropViewDistance = 12.5 -- The distance in GTA Units that a drop can be seen
 Config.UseItemDrop = false -- This will enable item object to spawn on drops instead of markers
-Config.ItemDropObject = `sf_prop_sf_backpack_01a` -- if Config.UseItemDrop is true, this will be the prop that spawns for the item
+Config.ItemDropObject = "sf_prop_sf_backpack_01a" -- if Config.UseItemDrop is true, this will be the prop that spawns for the item
 
-
--- This is needed in the inventory config, or it get many errors, this is for mh-stashes,
+-- it works but this is for mh-suitecases,
+-- this is needed in the inventory config, or the get many errors.
 Config.Stashes = { 
     ["walletstash"] = true, 
     ["cashstash"] = true, 
     ["drugsstash"] = true, 
-    ["weaponstash"] = true
+    ["weaponstash"] = true,
+    ['smallbagstash'] = true,
+    ['mediumbagstash'] = true,
+    ['largebagstash'] = true,
+    ["missionstash"] = true,
 }
 
-Config.CraftingObject = `prop_toolchest_05` -- Only needed if not using target | Line 928 to change Target Models
+Config.OnlyJobCanOpenJobVehicleTrucks = true
+
+Config.VehicleClassWeight = {
+    [0]  = { weight = 38000,  slots = 30 },  --0: Compacts  
+    [1]  = { weight = 50000,  slots = 30 },  --1: Sedans  
+    [2]  = { weight = 75000,  slots = 30 },  --2: SUVs  
+    [3]  = { weight = 42000,  slots = 30 },  --3: Coupes  
+    [4]  = { weight = 38000,  slots = 30 },  --4: Muscle  
+    [5]  = { weight = 30000,  slots = 30 },  --5: Sports Classics  
+    [6]  = { weight = 30000,  slots = 30 },  --6: Sports  
+    [7]  = { weight = 30000,  slots = 30 },  --7: Super  
+    [8]  = { weight = 15000,  slots = 30 },  --8: Motorcycles  
+    [9]  = { weight = 60000,  slots = 30 },  --9: Off-road  
+    [12] = { weight = 120000, slots = 30 },  --12: Vans  
+    [13] = { weight = 0,      slots = 0 },   --13: Cycles  
+    [14] = { weight = 120000, slots = 30 },  --14: Boats  
+    [15] = { weight = 120000, slots = 30 },  --15: Helicopters  
+    [16] = { weight = 120000, slots = 30 },  --16: Planes  
+    [17] = { weight = 60000,  slots = 30 },  --17: Service  
+    [18] = { weight = 60000,  slots = 30 },  --18: Emergency  
+    [19] = { weight = 60000,  slots = 30 },  --19: Military  
+    [20] = { weight = 60000,  slots = 30 },  --20: Commercial  
+    [21] = { weight = 60000,  slots = 30 },  --21: Trains  
+    [22] = { weight = 60000,  slots = 30 },  --22: Open Wheel
+}
+
+Config.CraftingObject = "prop_toolchest_05" -- Only needed if not using target | Line 928 to change Target Models
 
 Config.ToolBoxModels = {
-    `prop_tool_bench02_ld`,
-    `prop_tool_bench02`,
-    `prop_toolchest_02`,
-    `prop_toolchest_03`,
-    `prop_toolchest_03_l2`,
-    `prop_toolchest_05`,
-    `prop_toolchest_04`,
+    "prop_tool_bench02_ld",
+    "prop_tool_bench02",
+    "prop_toolchest_02",
+    "prop_toolchest_03",
+    "prop_toolchest_03_l2",
+    "prop_toolchest_05",
+    "prop_toolchest_04",
 }
 
 Config.Progressbar = {
@@ -360,44 +390,44 @@ Config.AttachmentCrafting = {
 }
 
 BackEngineVehicles = {
-    [`ninef`] = true,
-    [`adder`] = true,
-    [`vagner`] = true,
-    [`t20`] = true,
-    [`infernus`] = true,
-    [`zentorno`] = true,
-    [`reaper`] = true,
-    [`comet2`] = true,
-    [`comet3`] = true,
-    [`jester`] = true,
-    [`jester2`] = true,
-    [`cheetah`] = true,
-    [`cheetah2`] = true,
-    [`prototipo`] = true,
-    [`turismor`] = true,
-    [`pfister811`] = true,
-    [`ardent`] = true,
-    [`nero`] = true,
-    [`nero2`] = true,
-    [`tempesta`] = true,
-    [`vacca`] = true,
-    [`bullet`] = true,
-    [`osiris`] = true,
-    [`entityxf`] = true,
-    [`turismo2`] = true,
-    [`fmj`] = true,
-    [`re7b`] = true,
-    [`tyrus`] = true,
-    [`italigtb`] = true,
-    [`penetrator`] = true,
-    [`monroe`] = true,
-    [`ninef2`] = true,
-    [`stingergt`] = true,
-    [`surfer`] = true,
-    [`surfer2`] = true,
-    [`gp1`] = true,
-    [`autarch`] = true,
-    [`tyrant`] = true
+    ["ninef"] = true,
+    ["adder"] = true,
+    ["vagner"] = true,
+    ["t20"] = true,
+    ["infernus"] = true,
+    ["zentorno"] = true,
+    ["reaper"] = true,
+    ["comet2"] = true,
+    ["comet3"] = true,
+    ["jester"] = true,
+    ["jester2"] = true,
+    ["cheetah"] = true,
+    ["cheetah2"] = true,
+    ["prototipo"] = true,
+    ["turismor"] = true,
+    ["pfister811"] = true,
+    ["ardent"] = true,
+    ["nero"] = true,
+    ["nero2"] = true,
+    ["tempesta"] = true,
+    ["vacca"] = true,
+    ["bullet"] = true,
+    ["osiris"] = true,
+    ["entityxf"] = true,
+    ["turismo2"] = true,
+    ["fmj"] = true,
+    ["re7b"] = true,
+    ["tyrus"] = true,
+    ["italigtb"] = true,
+    ["penetrator"] = true,
+    ["monroe"] = true,
+    ["ninef2"] = true,
+    ["stingergt"] = true,
+    ["surfer"] = true,
+    ["surfer2"] = true,
+    ["gp1"] = true,
+    ["autarch"] = true,
+    ["tyrant"] = true
 }
 
 Config.MaximumAmmoValues = {
