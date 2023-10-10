@@ -12,6 +12,7 @@ Config.ItemDropObject = "sf_prop_sf_backpack_01a" -- if Config.UseItemDrop is tr
 
 -- it works but this is for mh-suitecases,
 -- this is needed in the inventory config, or the get many errors.
+-- all default true.
 Config.Stashes = { 
     ["walletstash"] = true, 
     ["cashstash"] = true, 
@@ -23,8 +24,11 @@ Config.Stashes = {
     ["missionstash"] = true,
 }
 
-Config.OnlyJobCanOpenJobVehicleTrucks = true
+-- only jobs can open trunks off job vehicles,
+-- so if you are driving a police car you need to be a police to able to open this trunk.
+Config.OnlyJobCanOpenJobVehicleTrucks = true -- defailt true
 
+-- vehicle class max trunk weight and slots
 Config.VehicleClassWeight = {
     [0]  = { weight = 38000,  slots = 30 },  --0: Compacts  
     [1]  = { weight = 50000,  slots = 30 },  --1: Sedans  
