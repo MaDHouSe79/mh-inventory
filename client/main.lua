@@ -829,15 +829,12 @@ RegisterCommand('inventory', function()
             end
             if CurrentVehicle then -- Trunk
                 local vehicleClass = GetVehicleClass(curVeh)
-                local maxweight = 60000
-                local slots = 35
+                local maxweight = Config.VehicleClassWeight[vehicleClass].weight
+                local slots = Config.VehicleClassWeight[vehicleClass].slots 
                 if Config.OnlyJobCanOpenJobVehicleTrucks then
                     local plate = QBCore.Functions.GetPlate(curVeh)
-                    maxweight = Config.VehicleClassWeight[vehicleClass].weight
-                    slots = Config.VehicleClassWeight[vehicleClass].slots  
                     local other = {maxweight = maxweight, slots = slots, plate = plate}
-                    local canOpen = isAllowToOpen(curVeh)
-                    if canOpen then 
+                    if isAllowToOpen(curVeh) then 
                         TriggerServerEvent("inventory:server:OpenInventory", "trunk", CurrentVehicle, other)
                         OpenTrunk()
                     else
