@@ -24,8 +24,9 @@ Config.Stashes = {
     ["missionstash"] = true,
 }
 
--- only jobs can open trunks off job vehicles,
--- so if you are driving a police car you need to be a police to able to open this trunk.
+-- only jobs can open trunks of job vehicles,
+-- if you are driving a police car you need to be a police to able to open this trunk, same for the amulance
+-- this so other players can't steel stuff.
 Config.OnlyJobCanOpenJobVehicleTrucks = true -- defailt true
 
 -- vehicle class max trunk weight and slots
