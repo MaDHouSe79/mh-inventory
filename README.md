@@ -30,6 +30,10 @@ This is a [ps-inventory](https://github.com/Project-Sloth/ps-inventory) version 
 also i renamed it back to qb-inventory cause the most servers uses that name in the exports,
 and if that is the case you can rename every export ban to how it was,
 but now in this version this is not needed anymore, i keep it as default as possible.
+-
+this inventory has a lock for trunks, you need the job if you have a job vehicle.
+so if you driving a police vehicle you need to be a police to be able to open the trunk.
+this is so other players cant steel stuff from the trunk.
 
 # Original ps-inventory
 - [ps-inventory](https://github.com/Project-Sloth/ps-inventory)
