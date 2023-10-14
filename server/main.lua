@@ -2642,11 +2642,11 @@ RegisterNetEvent('inventory:server:SetInventoryData',
             local fromItemData = Drops[fromInventory].items[fromSlot]
 
             -- mh-stashes (start)
-            local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
-            local canuse = IsStashItemLootable(src, stash, fromItemData)
+            --local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
+            --local canuse = IsStashItemLootable(src, stash, fromItemData)
             --print("To stash: " .. stash, "Can Use: " .. tostring(canuse))
             -- mh-stashes (end)
-            if canuse then
+            --if canuse then
                 fromAmount = tonumber(fromAmount) or fromItemData.amount
                 if fromItemData and fromItemData.amount >= fromAmount then
                     local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
@@ -2786,7 +2786,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                 else
                     QBCore.Functions.Notify(src, Lang:t('notify.not_exist'), "error")
                 end
-            end
+            --end
         end
     end)
 -- mh-stashes (End)
