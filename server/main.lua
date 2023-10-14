@@ -1824,11 +1824,11 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                         local toItemData = Drops[toInventory].items[toSlot]
 
                         -- mh-stashes (start)
-                        local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
-                        local canuse = IsStashItemLootable(src, stash, fromItemData)
+                        --local stash = QBCore.Shared.SplitStr(stashId, "_")[1]
+                        --local canuse = IsStashItemLootable(src, stash, fromItemData)
                         --print("To stash: " .. stash, "Can Use: " .. tostring(canuse))
                         -- mh-stashes (end)
-                        if canuse then
+                        --if canuse then
                             RemoveItem(src, fromItemData.name, fromAmount, fromSlot)
                             TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove",
                                 true)
@@ -1869,7 +1869,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                             if itemInfo["name"] == "radio" then
                                 TriggerClientEvent('Radio.Set', src, false)
                             end
-                        end
+                        --end
                     end
                 end
             else
