@@ -2524,6 +2524,8 @@ RegisterNetEvent('inventory:server:SetInventoryData',
             local itemInfo = QBCore.Shared.Items[itemData.name:lower()]
             local bankBalance = Player.PlayerData.money["bank"]
             local price = tonumber((itemData.price * fromAmount))
+
+
             if QBCore.Shared.SplitStr(shopType, "_")[1] == "Dealer" then
                 if QBCore.Shared.SplitStr(itemData.name, "_")[1] == "weapon" then
                     price = tonumber(itemData.price)
@@ -2552,6 +2554,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                     end
                 end
             elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "Itemshop" then
+                
                 if Player.Functions.RemoveMoney("cash", price, "itemshop-bought-item") then
                     if QBCore.Shared.SplitStr(itemData.name, "_")[1] == "weapon" then
                         itemData.info.serie = tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) ..
@@ -2560,7 +2563,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                         itemData.info.quality = 100
                     end
                     local serial = itemData.info.serie
-                    local imageurl = ("https://cfx-nui-ps-inventory/html/images/%s.png"):format(itemData.name)
+                    local imageurl = ("https://cfx-nui-qb-inventory/html/images/%s.png"):format(itemData.name)
                     local notes = "Purchased at Ammunation"
                     local owner = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
                     local weapClass = 1
@@ -2581,7 +2584,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                         itemData.info.quality = 100
                     end
                     local serial = itemData.info.serie
-                    local imageurl = ("https://cfx-nui-ps-inventory/html/images/%s.png"):format(itemData.name)
+                    local imageurl = ("https://cfx-nui-qb-inventory/html/images/%s.png"):format(itemData.name)
                     local notes = "Purchased at Ammunation"
                     local owner = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
                     local weapClass = 1
@@ -2596,11 +2599,15 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                 else
                     QBCore.Functions.Notify(src, Lang:t('notify.no_cash'), "error")
                 end
+
+            elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "market" then
+                TriggerEvent('mh-cashasitem:server:buyitemwithblackmoney', src, {
+                    ['item'] = itemData.name,
+                    ['price'] = price,
+                    ['amount'] = fromAmount
+                })
             else
                 if Player.Functions.RemoveMoney("cash", price, "unkown-itemshop-bought-item") then
-                    if itemData.name:lower() == 'wallet' then
-                        itemData.info.walletid = math.random(11111, 99999)
-                    end
                     AddItem(src, itemData.name, fromAmount, toSlot, itemData.info)
                     QBCore.Functions.Notify(src, itemInfo["label"] .. " bought!", "success")
                     TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green",
