@@ -2598,7 +2598,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
                 end
             
             elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "market" then
-                TriggerEvent('mh-cashasitem:server:buyitemwithblackmoney', {
+                TriggerEvent('mh-cashasitem:server:buyitemwithblackmoney', src, {
                     ['item'] = itemData.name,
                     ['price'] = price,
                     ['amount'] = fromAmount
