@@ -2600,9 +2600,8 @@ RegisterNetEvent('inventory:server:SetInventoryData',
             elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "market" then
                 if Player.Functions.RemoveMoney("blackmoney", price, "blackmarket-item-bought") then
                     AddItem(src, itemData.name, fromAmount, toSlot, itemData.info)
-                    TriggerClientEvent('qb-drugs:client:updateDealerItems', src, itemData, fromAmount)
                     QBCore.Functions.Notify(src, itemInfo["label"] .. " bought!", "success")
-                    TriggerEvent("qb-log:server:CreateLog", "dealers", "Blackmarket item bought", "green", "**" ..
+                    TriggerEvent("qb-log:server:CreateLog", "blackmarket", "Blackmarket item bought", "green", "**" ..
                         GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. "  for $" .. price)
                 else
                     QBCore.Functions.Notify(src, "You don't have blackmoney", "error")
