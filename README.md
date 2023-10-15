@@ -28,7 +28,7 @@
 # mh-inventory
 This is a [ps-inventory](https://github.com/Project-Sloth/ps-inventory) version but i edit it for [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem) and [mh-stashes](https://github.com/MaDHouSe79/mh-stashes),
 also i renamed it back to qb-inventory cause the most servers uses that name in the exports,
-and if that is the case you can rename every export ban to how it was,
+and if that is the case you can rename every export to how it was,
 but now in this version this is not needed anymore, i keep it as default as possible.
 -
 this inventory has a lock for trunks, you need the job if you have a job vehicle.
