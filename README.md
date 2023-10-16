@@ -59,5 +59,10 @@ this is so other players cant steel stuff from the trunk.
 - 4. Add your own images from your old `qb-inventory/html/images` in the new `qb-inventory/html/images` folder.
 - 5. Restart the server.
 
+# Contributers
+<a href="https://github.com/MaDHouSe79/mh-carlift/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=MaDHouSe79/mh-carlift" />
+</a>
+
 # License
 [GPL LICENSE](./LICENSE)<br />
