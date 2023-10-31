@@ -1498,6 +1498,10 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
                         end
                     end
                 end
+            elseif itemData.type == "weapon" then
+                if itemData.name == "weapon_hazardcan" or itemData.name == "weapon_petrolcan" or itemData.name == "weapon_fireextinguisher" then
+                    TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
+                end
             end
             if Config.Stashes[itemData.name:lower()] then
                 lastUsedStashItem = itemData
