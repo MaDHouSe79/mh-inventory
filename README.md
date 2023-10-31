@@ -95,7 +95,7 @@ this is so other players cant steel stuff from the trunk.
     ['useable'] = true,
     ['description'] = 'Weapon Hazardcan'
 }
-
+```
 # Contributers
 <a href="https://github.com/MaDHouSe79/mh-carlift/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=MaDHouSe79/mh-carlift" />
