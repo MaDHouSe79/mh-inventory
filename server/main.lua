@@ -1469,6 +1469,9 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
                     end
                 end
             else
+		if itemData.name == "weapon_hazardcan" or itemData.name == "weapon_petrolcan" or itemData.name == "weapon_fireextinguisher" then
+                    TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
+                end
                 UseItem(itemData.name, src, itemData)
                 TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
             end
