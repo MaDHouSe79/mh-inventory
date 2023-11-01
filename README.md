@@ -40,7 +40,6 @@ this is so other players cant steel stuff from the trunk.
 
 # Compatible
 - [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
-- [mh-stashes](https://github.com/MaDHouSe79/mh-stashes)
 - [mh-blackmarket](https://github.com/MaDHouSe79/mh-blackmarket)
 
 # Dependencies
