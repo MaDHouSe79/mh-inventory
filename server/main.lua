@@ -2826,18 +2826,18 @@ RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, 
     local OtherPlayer = QBCore.Functions.GetPlayer(target)
     local dist = #(GetEntityCoords(GetPlayerPed(src)) - GetEntityCoords(GetPlayerPed(target)))
     if Player == OtherPlayer then
-        return QBCore.Functions.Notify(src, "You can\'t give yourself an item?")
+        return QBCore.Functions.Notify(src, Lang:t("notify.gsitem"))
     end
     if dist > 2 then
-        return QBCore.Functions.Notify(src, "You are too far away to give items!")
+        return QBCore.Functions.Notify(src, Lang:t("notify.tftgitem"))
     end
     local item = GetItemBySlot(src, slot)
     if not item then
-        QBCore.Functions.Notify(src, "Item you tried giving not found!");
+        QBCore.Functions.Notify(src, Lang:t("notify.infound"));
         return
     end
     if item.name ~= name then
-        QBCore.Functions.Notify(src, "Incorrect item found try again!");
+        QBCore.Functions.Notify(src, Lang:t("notify.iifound"));
         return
     end
     if amount <= item.amount then
@@ -2845,33 +2845,37 @@ RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, 
             amount = item.amount
         end
         if RemoveItem(src, item.name, amount, item.slot) then
-            if AddItem(target, item.name, amount, false, item.info, item.created) then
+            TriggerEvent('mh-cashasitem:server:updateCash', src, item, amount, "remove", true)
+            if AddItem(target, item.name, amount, false, item.info) then
+                TriggerEvent('mh-cashasitem:server:updateCash', target, item, amount, "add", true)
                 TriggerClientEvent('inventory:client:ItemBox', target, QBCore.Shared.Items[item.name], "add")
                 QBCore.Functions.Notify(target,
-                    "You Received " .. amount .. ' ' .. item.label .. " From " .. Player.PlayerData.charinfo.firstname ..
-                        " " .. Player.PlayerData.charinfo.lastname)
+                    Lang:t("notify.gitemrec") .. amount .. ' ' .. item.label .. Lang:t("notify.gitemfrom") ..
+                        Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname)
                 TriggerClientEvent("inventory:client:UpdatePlayerInventory", target, true)
                 TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "remove")
                 QBCore.Functions.Notify(src,
-                    "You gave " .. OtherPlayer.PlayerData.charinfo.firstname .. " " ..
+                    Lang:t("notify.gitemyg") .. OtherPlayer.PlayerData.charinfo.firstname .. " " ..
                         OtherPlayer.PlayerData.charinfo.lastname .. " " .. amount .. " " .. item.label .. "!")
                 TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
                 TriggerClientEvent('qb-inventory:client:giveAnim', src)
                 TriggerClientEvent('qb-inventory:client:giveAnim', target)
             else
-                AddItem(src, item.name, amount, item.slot, item.info, item.created)
-                QBCore.Functions.Notify(src, "The other players inventory is full!", "error")
-                QBCore.Functions.Notify(target, "The other players inventory is full!", "error")
+                AddItem(src, item.name, amount, item.slot, item.info)
+                TriggerEvent('mh-cashasitem:server:updateCash', src, item, amount, "add", true)
+                QBCore.Functions.Notify(src, Lang:t("notify.gitinvfull"), "error")
+                QBCore.Functions.Notify(target, Lang:t("notify.giymif"), "error")
                 TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, false)
                 TriggerClientEvent("inventory:client:UpdatePlayerInventory", target, false)
             end
         else
-            QBCore.Functions.Notify(src, "You do not have enough of the item", "error")
+            QBCore.Functions.Notify(src, Lang:t("notify.gitydhei"), "error")
         end
     else
-        QBCore.Functions.Notify(src, "You do not have enough items to transfer")
+        QBCore.Functions.Notify(src, Lang:t("notify.gitydhitt"))
     end
 end)
+
 
 RegisterNetEvent('inventory:server:snowball', function(action)
     if action == "add" then
